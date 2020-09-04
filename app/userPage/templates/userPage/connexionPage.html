@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Information</title>
+    <title>Connection</title>
     <meta charset="utf-8">
     <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
@@ -12,19 +12,19 @@
 
 
     <div class=" text-center">
-      <h1>Informations de l'utilisateur</h1>
+      <h1>Connection de l'utilisateur</h1>
     </div>
 
     <div class = "container text-center">
-      <form id="tab">
+      <form action="{% url 'userPage:connect' %}" id="tab" method="post">
+          {% csrf_token %}
           <label>Username</label>
-          <input type="text" value={{user.username}} class="input-xlarge" disabled>
+          <input type="text"  name='username' class="input-xlarge" >
           <label>Password</label>
-          <input type="password" value="{{user.password}}" class="input-xlarge" disabled>
-          <label>Email</label>
-          <input type="text" value={{user.email}} class="input-xlarge" disabled>
+          <input type="password"  name='password' class="input-xlarge" >
+
         	<div>
-      	    <button class="btn btn-primary">Modifier</button>
+      	    <button class="btn btn-primary" type="submit">Connection</button>
       	</div>
       </form>
     </div>
