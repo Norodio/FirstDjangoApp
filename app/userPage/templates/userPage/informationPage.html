@@ -4,8 +4,8 @@
     <title>Information</title>
     <meta charset="utf-8">
     <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
-    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" ></script>
   </head>
 
 <body>
@@ -24,11 +24,39 @@
           <label>Email</label>
           <input type="text" value={{user.email}} class="input-xlarge" disabled>
         	<div>
-      	    <button class="btn btn-primary">Modifier</button>
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+              Modifier
+            </button>
+
       	</div>
       </form>
     </div>
 
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <form id="item_update_form" method='post' action='{% url 'userPage:update' user.id %}'>
+            {% csrf_token %}
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Modifier l'email</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <label>Email</label>
+                <input type="text" value={{user.email}} name="email" class="input-xlarge" >
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+              <button  class="btn btn-primary" type="submit" >Sauvegarder</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
 </body>
 
 </html>
