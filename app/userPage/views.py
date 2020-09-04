@@ -6,6 +6,7 @@ from django.urls import reverse
 from django.views.generic import UpdateView, ListView
 
 from django.contrib.auth.models import User
+import re
 
 
 def index(request):
@@ -44,10 +45,13 @@ def connect(request):
 
 def update(request,user_id):
     user = get_object_or_404(User,pk=user_id)
-    print(request.POST['email'])
+
+    EMAIL_REGEX = re.compile(r"[^@]+@[^@]+\.[^@]+")
+    if not EMAIL_REGEX.match(request.POST['email']):
+        raise Exception ('email do not match regex')
     try:
         user.email = request.POST['email']
         user.save()
     except Exception as e:
-        print(e)
+        raise e
     return HttpResponseRedirect(reverse('userPage:informationPage', args=(user.id,)))
